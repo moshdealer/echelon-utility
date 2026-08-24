@@ -1,0 +1,60 @@
+rules:
+  debug_logging:
+    enabled: true
+    severity: LOW
+    keys:
+      - level
+      - log_level
+    unsafe_values:
+      - debug
+      - trace
+    recommendation: "Используйте менее подробный уровень логирования (info+)."
+
+  plaintext_password:
+    enabled: true
+    severity: HIGH
+    keys:
+      - password
+      - passwd
+      - pwd
+      - db_password
+    recommendation: "Передавайте пароль через защищённое хранилище секретов."
+
+  public_bind:
+    enabled: true
+    severity: MEDIUM
+    keys:
+      - host
+      - bind
+      - listen_address
+    unsafe_addresses:
+      - "0.0.0.0"
+      - "::"
+    recommendation: "Ограничьте адрес прослушивания или доступ сетевыми правилами."
+
+  disabled_tls:
+    enabled: true
+    severity: HIGH
+    false_keys:
+      - tls
+      - tls_enabled
+      - tls_verify
+    true_keys:
+      - insecure
+      - skip_tls_verify
+      - insecure_skip_verify
+    recommendation: "Включите TLS и проверку сертификата."
+
+  weak_algorithm:
+    enabled: true
+    severity: HIGH
+    keys:
+      - algorithm
+      - hash_algorithm
+      - digest_algorithm
+      - digest-algorithm
+    unsafe_algorithms:
+      - md5
+      - sha1
+      - des
+    recommendation: "Используйте современный безопасный алгоритм."

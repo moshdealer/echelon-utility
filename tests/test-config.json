@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "server": {
+    "host": "0.0.0.0",
+    "tls": false
+  },
+  "log": {
+    "output": "stdout",
+    "level": "debug"
+  },
+  "database": {
+    "username": "app",
+    "password": "plain-text-password"
+  },
+  "storage": {
+    "digest-algorithm": "MD5"
+  }
+}
