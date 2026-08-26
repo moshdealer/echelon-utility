@@ -5,11 +5,9 @@ server:
   tls: false
 
 log:
-  output: stdout
   level: debug
 
 database:
-  username: app
   password: plain-text-password
 
 storage:

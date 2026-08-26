@@ -1,0 +1,14 @@
+environments:
+  - name: production
+    services:
+      - bind: "0.0.0.0"
+        tls_verify: false
+        algorithm: DES
+      - host: "127.0.0.1"
+        tls_verify: true
+        algorithm: AES
+  - name: staging
+    services:
+      - log_level: TRACE
+        passwd: staging-secret
+        insecure_skip_verify: true

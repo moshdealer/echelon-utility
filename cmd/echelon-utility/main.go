@@ -4,10 +4,13 @@ import (
 	"fmt"
 	"os"
 
+	"echelon-utility/internal/analyzer"
 	"echelon-utility/internal/cli"
 	"echelon-utility/internal/config"
 	"echelon-utility/internal/document"
+	"echelon-utility/internal/output"
 	"echelon-utility/internal/parser"
+	"echelon-utility/internal/rule"
 	"echelon-utility/internal/source"
 )
 
@@ -17,6 +20,8 @@ type App struct {
 	Input      *source.Input
 	Resolver   *parser.Resolver
 	Document   *document.Document
+	Rules      []rule.Rule
+	Analyzer   *analyzer.Analyzer
 }
 
 func main() {
@@ -37,7 +42,6 @@ func main() {
 		os.Exit(1)
 	}
 	Utility.Cfg = cfg
-
 	// Извлечение данных в виде байтов из файла/stdin
 	var s source.Loader
 	if Utility.CLIOptions.FromStdin {
@@ -60,4 +64,20 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Создаем список правил и анализатор
+	Utility.Rules = rule.Build(cfg.Rules)
+	Utility.Analyzer = analyzer.New(Utility.Rules)
+
+	result := Utility.Analyzer.Analyze(Utility.Document)
+
+	// Вывод
+	if err := output.WriteText(os.Stdout, result); err != nil {
+		fmt.Fprintln(os.Stderr, fmt.Errorf("write output error: %w", err))
+		os.Exit(1)
+	}
+
+	// Завершение программы
+	if len(result) > 0 && !Utility.CLIOptions.Silent {
+		os.Exit(1)
+	}
 }

@@ -1,0 +1,17 @@
+{
+  "logging": {
+    "LOG_LEVEL": "TRACE"
+  },
+  "database": {
+    "DB_PASSWORD": "secret"
+  },
+  "network": {
+    "LISTEN_ADDRESS": "::"
+  },
+  "security": {
+    "SKIP_TLS_VERIFY": true
+  },
+  "crypto": {
+    "HASH_ALGORITHM": "SHA1"
+  }
+}
