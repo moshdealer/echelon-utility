@@ -1,0 +1,14 @@
+version: "1.0"
+
+server:
+  host: "127.0.0.1"
+  tls: true
+
+log:
+  level: info
+
+database:
+  username: app
+
+storage:
+  digest-algorithm: sha256

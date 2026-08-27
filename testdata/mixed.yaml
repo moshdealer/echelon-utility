@@ -1,0 +1,15 @@
+server:
+  host: "0.0.0.0"
+  tls: true
+
+log:
+  level: trace
+
+database:
+  username: app
+
+storage:
+  algorithm: sha256
+
+client:
+  insecure: true

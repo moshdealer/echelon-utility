@@ -1,0 +1,16 @@
+services:
+  rest:
+    image: echelon-rest:local
+    build:
+      context: .
+      dockerfile: rest/Dockerfile
+    ports:
+      - "8080:8080"
+
+  grpc:
+    image: echelon-grpc:local
+    build:
+      context: .
+      dockerfile: grpc/Dockerfile
+    ports:
+      - "9090:9090"
