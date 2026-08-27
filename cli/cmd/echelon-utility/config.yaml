@@ -58,3 +58,8 @@ rules:
       - sha1
       - des
     recommendation: "Используйте современный безопасный алгоритм."
+
+  file_permissions:
+    enabled: true
+    severity: MEDIUM
+    recommendation: "Уберите права на запись для группы и остальных пользователей."

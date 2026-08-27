@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "server": {
+    "host": "0.0.0.0",
+    "tls": false
+  },
+  "log": {
+    "level": "debug"
+  },
+  "database": {
+    "password": "plain-text-password"
+  },
+  "storage": {
+    "digest-algorithm": "MD5"
+  }
+}

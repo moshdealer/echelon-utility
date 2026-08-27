@@ -10,7 +10,7 @@ import (
 // Пакет config нужен для чтения конфига самой утилиты echelon-utility
 // Нужен для определения правил (например, какие алгоритмы считаем ненадежными и тп)
 
-// Load считывает переменные из файла config.yaml, находящегося по пути cmd/echelon-utility
+// Load считывает переменные из файла config.yaml, находящегося по пути cli/cmd/echelon-utility
 func Load() (*Config, error) {
 	v := viper.New()
 	setDefaults(v)
@@ -18,7 +18,7 @@ func Load() (*Config, error) {
 	v.SetConfigName("config")
 	v.SetConfigType("yaml")
 
-	v.AddConfigPath("./cmd/echelon-utility")
+	v.AddConfigPath("./cli/cmd/echelon-utility")
 	v.AddConfigPath(".")
 
 	// Если конфиг не найден - пользуемся default значениями
@@ -80,6 +80,7 @@ func setDefaults(v *viper.Viper) {
 	})
 	v.SetDefault("rules.public_bind.unsafe_addresses", []string{
 		"0.0.0.0",
+		"::",
 	})
 
 	// TLS
@@ -114,4 +115,10 @@ func setDefaults(v *viper.Viper) {
 		"sha1",
 		"des",
 	})
+
+	// Права доступа к файлу
+	v.SetDefault("rules.file_permissions.enabled", true)
+	v.SetDefault("rules.file_permissions.severity", "MEDIUM")
+	v.SetDefault("rules.file_permissions.recommendation",
+		"Уберите права на запись для группы и остальных пользователей.")
 }

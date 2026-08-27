@@ -12,9 +12,16 @@ import (
 func WriteText(w io.Writer, findings []rule.Finding) error {
 	for index, finding := range findings {
 		message := joinSentences(finding.Message, finding.Recommendation)
+		location := finding.Path
+		if finding.Source != "" {
+			location = finding.Source
+			if finding.Path != "" {
+				location += ":" + finding.Path
+			}
+		}
 
-		if _, err := fmt.Fprintf(w, "%s: [%s] %s\n", finding.Severity, finding.Path, message); err != nil {
-			return fmt.Errorf("write finding %d: %w", index, err)
+		if _, err := fmt.Fprintf(w, "%s: [%s] %s\n", finding.Severity, location, message); err != nil {
+			return fmt.Errorf("write finding err %d: %w", index, err)
 		}
 	}
 

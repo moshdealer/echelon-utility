@@ -10,6 +10,7 @@ type RulesConfig struct {
 	PublicBind        PublicBindRuleConfig        `mapstructure:"public_bind"`
 	DisabledTLS       DisabledTLSRuleConfig       `mapstructure:"disabled_tls"`
 	WeakAlgorithm     WeakAlgorithmRuleConfig     `mapstructure:"weak_algorithm"`
+	FilePermissions   FilePermissionRuleConfig    `mapstructure:"file_permissions"`
 }
 
 type CommonRuleConfig struct {
@@ -49,4 +50,8 @@ type WeakAlgorithmRuleConfig struct {
 	CommonRuleConfig `mapstructure:",squash"`
 	Keys             []string `mapstructure:"keys"`
 	UnsafeAlgorithms []string `mapstructure:"unsafe_algorithms"`
+}
+
+type FilePermissionRuleConfig struct {
+	CommonRuleConfig `mapstructure:",squash"`
 }
